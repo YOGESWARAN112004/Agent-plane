@@ -71,7 +71,7 @@ import { useCurrentPlan } from "../_app.orgs.$organizationSlug/route";
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Schedules | Trigger.dev`,
+      title: `Schedules | AgentPlane`,
     },
   ];
 };
@@ -251,9 +251,8 @@ export default function Page() {
                                 cy="12"
                               />
                               <circle
-                                className={`fill-none ${
-                                  requiresUpgrade ? "stroke-error" : "stroke-success"
-                                }`}
+                                className={`fill-none ${requiresUpgrade ? "stroke-error" : "stroke-success"
+                                  }`}
                                 strokeWidth="4"
                                 r="10"
                                 cx="12"
@@ -398,9 +397,8 @@ function SchedulesTable({
           <TableBlankRow colSpan={10}>There are no matches for your filters</TableBlankRow>
         ) : (
           schedules.map((schedule) => {
-            const path = `${v3SchedulePath(organization, project, environment, schedule)}${
-              location.search
-            }`;
+            const path = `${v3SchedulePath(organization, project, environment, schedule)}${location.search
+              }`;
             const isSelected = scheduleParam === schedule.friendlyId;
             const cellClass = schedule.active ? "" : "opacity-50";
             return (

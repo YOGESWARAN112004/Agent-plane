@@ -123,7 +123,7 @@ export function HelpAndFeedback({ disableShortcut = false }: { disableShortcut?:
                         <Icon icon={SlackIcon} className="h-10 w-10 min-w-[2.5rem]" />
                         <Paragraph variant="base/bright">
                           As a subscriber, you have access to a dedicated Slack channel for 1-to-1
-                          support with the Trigger.dev team.
+                          support with the AgentPlane team.
                         </Paragraph>
                       </div>
                       <hr className="border-charcoal-800" />
@@ -131,7 +131,7 @@ export function HelpAndFeedback({ disableShortcut = false }: { disableShortcut?:
                         <StepNumber stepNumber="1" title="Email us" />
                         <StepContentContainer>
                           <Paragraph>
-                            Send us an email to this address from your Trigger.dev account email
+                            Send us an email to this address from your AgentPlane account email
                             address:
                             <ClipboardField
                               variant="secondary/medium"

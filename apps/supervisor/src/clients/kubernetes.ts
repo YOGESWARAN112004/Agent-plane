@@ -18,6 +18,7 @@ export function createK8sApi() {
     labelSelector?: string,
     fieldSelector?: string
   ): Informer<T> {
+    // @ts-expect-error
     return k8s.makeInformer(kubeConfig, path, listPromiseFn, labelSelector, fieldSelector);
   }
 

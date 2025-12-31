@@ -2,6 +2,7 @@ import { tryCatch } from "@trigger.dev/core/utils";
 import { Redis, type RedisOptions } from "@internal/redis";
 import EventEmitter from "node:events";
 import { Client, ClientConfig, Connection } from "pg";
+// @ts-ignore
 import Redlock, { Lock } from "redlock";
 import { createRedisClient } from "@internal/redis";
 import { Logger } from "@trigger.dev/core/logger";
@@ -443,10 +444,9 @@ export class LogicalReplicationClient {
 
     const [createError] = await tryCatch(
       this.client.query(
-        `CREATE PUBLICATION "${this.options.publicationName}" FOR TABLE "${this.options.table}" ${
-          this.options.publicationActions
-            ? `WITH (publish = '${this.options.publicationActions.join(", ")}')`
-            : ""
+        `CREATE PUBLICATION "${this.options.publicationName}" FOR TABLE "${this.options.table}" ${this.options.publicationActions
+          ? `WITH (publish = '${this.options.publicationActions.join(", ")}')`
+          : ""
         };`
       )
     );
@@ -551,15 +551,13 @@ export class LogicalReplicationClient {
         if (actualActions.pubdelete) currentActions.push("delete");
         if (actualActions.pubtruncate) currentActions.push("truncate");
 
-        return `Publication '${
-          this.options.publicationName
-        }' is missing required actions. Expected: [${this.options.publicationActions.join(
-          ", "
-        )}], Current: [${currentActions.join(", ")}], Missing: [${missingActions.join(
-          ", "
-        )}]. Run: ALTER PUBLICATION ${
-          this.options.publicationName
-        } SET (publish = '${this.options.publicationActions.join(", ")}');`;
+        return `Publication '${this.options.publicationName
+          }' is missing required actions. Expected: [${this.options.publicationActions.join(
+            ", "
+          )}], Current: [${currentActions.join(", ")}], Missing: [${missingActions.join(
+            ", "
+          )}]. Run: ALTER PUBLICATION ${this.options.publicationName
+          } SET (publish = '${this.options.publicationActions.join(", ")}');`;
       }
     }
 

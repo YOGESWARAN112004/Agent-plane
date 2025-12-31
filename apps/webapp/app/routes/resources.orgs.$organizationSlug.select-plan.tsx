@@ -104,29 +104,29 @@ export async function action({ request, params }: ActionFunctionArgs) {
               uiComponent.divider({ spacingSize: "M" }),
               ...(reasons.length > 0
                 ? [
-                    uiComponent.spacer({ size: "L" }),
-                    uiComponent.text({
-                      size: "L",
-                      color: "NORMAL",
-                      text: "Reasons:",
-                    }),
-                    uiComponent.text({
-                      text: reasons.join(", "),
-                    }),
-                  ]
+                  uiComponent.spacer({ size: "L" }),
+                  uiComponent.text({
+                    size: "L",
+                    color: "NORMAL",
+                    text: "Reasons:",
+                  }),
+                  uiComponent.text({
+                    text: reasons.join(", "),
+                  }),
+                ]
                 : []),
               ...(message
                 ? [
-                    uiComponent.spacer({ size: "L" }),
-                    uiComponent.text({
-                      size: "L",
-                      color: "NORMAL",
-                      text: "Comment:",
-                    }),
-                    uiComponent.text({
-                      text: message.toString(),
-                    }),
-                  ]
+                  uiComponent.spacer({ size: "L" }),
+                  uiComponent.text({
+                    size: "L",
+                    color: "NORMAL",
+                    text: "Comment:",
+                  }),
+                  uiComponent.text({
+                    text: message.toString(),
+                  }),
+                ]
                 : []),
             ],
           });
@@ -343,7 +343,7 @@ export function TierFree({
           <div className="flex flex-col gap-2 rounded-sm border border-warning p-4">
             <ExclamationTriangleIcon className="size-6 text-warning" />
             <Paragraph variant="small/bright">
-              Your Trigger.dev account failed to be verified for the Free plan because your GitHub
+              Your AgentPlane account failed to be verified for the Free plan because your GitHub
               account is too new. We require verification to prevent malicious use of our platform.
             </Paragraph>
             <Paragraph variant="small/bright">
@@ -513,10 +513,10 @@ export function TierFree({
                 {subscription?.plan === undefined
                   ? "Select plan"
                   : subscription.plan.type === "free"
-                  ? "Current plan"
-                  : subscription.canceledAt !== undefined
-                  ? "Current plan"
-                  : "Select plan"}
+                    ? "Current plan"
+                    : subscription.canceledAt !== undefined
+                      ? "Current plan"
+                      : "Select plan"}
               </Button>
             </Form>
           )}
@@ -578,9 +578,9 @@ export function TierHobby({
         <input type="hidden" name="planCode" value={plan.code} />
         <input type="hidden" name="callerPath" value={location.pathname} />
         {subscription?.plan !== undefined &&
-        subscription.plan.type !== "free" &&
-        subscription.canceledAt === undefined &&
-        subscription.plan.code !== plan.code ? (
+          subscription.plan.type !== "free" &&
+          subscription.canceledAt === undefined &&
+          subscription.plan.code !== plan.code ? (
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} key="downgrade">
             <DialogTrigger asChild>
               <Button variant="secondary/large" fullWidth className="text-md font-medium">
@@ -630,10 +630,10 @@ export function TierHobby({
             {subscription?.plan === undefined
               ? "Select plan"
               : subscription.plan.type === "free" || subscription.canceledAt !== undefined
-              ? `Upgrade to ${plan.title}`
-              : subscription.plan.code === plan.code
-              ? "Current plan"
-              : `Upgrade to ${plan.title}`}
+                ? `Upgrade to ${plan.title}`
+                : subscription.plan.code === plan.code
+                  ? "Current plan"
+                  : `Upgrade to ${plan.title}`}
           </Button>
         )}
       </Form>
@@ -694,9 +694,9 @@ export function TierPro({
           <input type="hidden" name="planCode" value={plan.code} />
           <input type="hidden" name="callerPath" value={location.pathname} />
           {subscription?.plan !== undefined &&
-          subscription?.plan?.type === "paid" &&
-          subscription?.plan?.code !== plan.code &&
-          subscription.canceledAt === undefined ? (
+            subscription?.plan?.type === "paid" &&
+            subscription?.plan?.code !== plan.code &&
+            subscription.canceledAt === undefined ? (
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} key="upgrade">
               <DialogTrigger asChild>
                 <Button variant="secondary/large" fullWidth className="text-md font-medium">
@@ -748,19 +748,18 @@ export function TierPro({
               {subscription?.plan === undefined
                 ? "Select plan"
                 : subscription.plan.type === "free" || subscription.canceledAt !== undefined
-                ? `Upgrade to ${plan.title}`
-                : subscription.plan.code === plan.code
-                ? "Current plan"
-                : `Upgrade to ${plan.title}`}
+                  ? `Upgrade to ${plan.title}`
+                  : subscription.plan.code === plan.code
+                    ? "Current plan"
+                    : `Upgrade to ${plan.title}`}
             </Button>
           )}
         </div>
       </Form>
       <ul className="flex flex-col gap-2.5">
         <ConcurrentRuns limits={plan.limits}>
-          {`Then ${formatCurrency(concurrencyAddOnPricing.centsPerStep / 100, true)}/month per ${
-            concurrencyAddOnPricing.stepSize
-          }`}
+          {`Then ${formatCurrency(concurrencyAddOnPricing.centsPerStep / 100, true)}/month per ${concurrencyAddOnPricing.stepSize
+            }`}
         </ConcurrentRuns>
         <FeatureItem checked>
           Unlimited{" "}

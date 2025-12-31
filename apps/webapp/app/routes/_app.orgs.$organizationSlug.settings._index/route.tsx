@@ -62,7 +62,7 @@ import {
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Organization settings | Trigger.dev`,
+      title: `Organization settings | AgentPlane`,
     },
   ];
 };

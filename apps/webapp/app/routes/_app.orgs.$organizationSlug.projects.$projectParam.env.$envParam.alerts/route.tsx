@@ -67,7 +67,7 @@ import {
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Alerts | Trigger.dev`,
+      title: `Alerts | AgentPlane`,
     },
   ];
 };
@@ -216,13 +216,13 @@ export default function Page() {
               </TableHeader>
               <TableBody>
                 {alertChannels.length > 0 ? (
-                  alertChannels.map((alertChannel) => (
+                  alertChannels.map((alertChannel: AlertChannelListPresenterRecord) => (
                     <TableRow key={alertChannel.id}>
                       <TableCell className={alertChannel.enabled ? "" : "opacity-50"}>
                         {alertChannel.name}
                       </TableCell>
                       <TableCell className={alertChannel.enabled ? "" : "opacity-50"}>
-                        {alertChannel.alertTypes.map((type) => alertTypeTitle(type)).join(", ")}
+                        {alertChannel.alertTypes.map((type: any) => alertTypeTitle(type)).join(", ")}
                       </TableCell>
                       <TableCell className={cn("py-1", alertChannel.enabled ? "" : "opacity-50")}>
                         <AlertChannelDetails alertChannel={alertChannel} />
@@ -236,7 +236,7 @@ export default function Page() {
                       </TableCell>
                       <TableCell className={alertChannel.enabled ? "" : "opacity-50"}>
                         <div className="flex items-center gap-3">
-                          {alertChannel.environmentTypes.map((environmentType) => (
+                          {alertChannel.environmentTypes.map((environmentType: any) => (
                             <EnvironmentCombo
                               key={environmentType}
                               environment={{ type: environmentType }}
@@ -303,9 +303,8 @@ export default function Page() {
                             cy="12"
                           />
                           <circle
-                            className={`fill-none ${
-                              requiresUpgrade ? "stroke-error" : "stroke-success"
-                            }`}
+                            className={`fill-none ${requiresUpgrade ? "stroke-error" : "stroke-success"
+                              }`}
                             strokeWidth="4"
                             r="10"
                             cx="12"
@@ -556,7 +555,7 @@ export function alertTypeTitle(alertType: ProjectAlertType): string {
     case "DEPLOYMENT_SUCCESS":
       return "Deployment success";
     default: {
-      assertNever(alertType);
+      assertNever(alertType as never);
     }
   }
 }
@@ -576,7 +575,7 @@ export function AlertChannelTypeIcon({
     case "WEBHOOK":
       return <GlobeAltIcon className={className} />;
     default: {
-      assertNever(channelType);
+      assertNever(channelType as never);
     }
   }
 }

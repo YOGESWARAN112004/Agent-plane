@@ -72,7 +72,7 @@ import { AllocateConcurrencyService } from "~/v3/services/allocateConcurrency.se
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Manage concurrency | Trigger.dev`,
+      title: `Manage concurrency | AgentPlane`,
     },
   ];
 };
@@ -363,8 +363,8 @@ function Upgradable({
                     unallocated > 0
                       ? "text-success"
                       : unallocated < 0
-                      ? "text-error"
-                      : "text-text-bright"
+                        ? "text-error"
+                        : "text-text-bright"
                   )}
                 >
                   {allocationModified ? (
@@ -674,8 +674,8 @@ function PurchaseConcurrencyModal({
                   <Header3 className="justify-self-end font-normal text-text-bright">
                     {formatCurrency(
                       (extraConcurrency * concurrencyPricing.centsPerStep) /
-                        concurrencyPricing.stepSize /
-                        100,
+                      concurrencyPricing.stepSize /
+                      100,
                       true
                     )}
                   </Header3>
@@ -695,8 +695,8 @@ function PurchaseConcurrencyModal({
                     {state === "increase" ? "+" : null}
                     {formatCurrency(
                       ((amountValue - extraConcurrency) * concurrencyPricing.centsPerStep) /
-                        concurrencyPricing.stepSize /
-                        100,
+                      concurrencyPricing.stepSize /
+                      100,
                       true
                     )}
                   </Header3>
@@ -715,8 +715,8 @@ function PurchaseConcurrencyModal({
                   <Header3 className="justify-self-end font-normal text-text-bright">
                     {formatCurrency(
                       (amountValue * concurrencyPricing.centsPerStep) /
-                        concurrencyPricing.stepSize /
-                        100,
+                      concurrencyPricing.stepSize /
+                      100,
                       true
                     )}
                   </Header3>

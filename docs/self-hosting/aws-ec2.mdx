@@ -1,0 +1,158 @@
+---
+title: "AWS EC2 Deployment"
+description: "Deploy AgentPlane to a single AWS EC2 instance using Docker Compose and Traefik."
+---
+
+This guide will help you deploy AgentPlane to an AWS EC2 instance. This method is the simplest way to get a production-ready environment up and running.
+
+> [!WARNING]
+> This guide sets up a "Single Server" architecture. While suitable for many production workloads, it does not provide high availability or auto-scaling.
+
+## Prerequisites
+
+- An **AWS Account**.
+- A valid **Domain Name** (e.g., `agentplane.yourdomain.com`).
+- Basic familiarity with SSH and the command line.
+
+## 1. Launching an EC2 Instance
+
+1.  **AMI**: Choose **Ubuntu Server 24.04 LTS (HVM)**.
+2.  **Instance Type**:
+    *   **Minimum**: `t3.medium` (2 vCPU, 4GB RAM)
+    *   **Recommended**: `t3.large` (2 vCPU, 8GB RAM) or larger depending on workload.
+3.  **Storage**: At least **40GB** of GP3 storage. You will be storing Docker images and database data here.
+4.  **Security Group**: Create a new security group with the following inbound rules:
+    *   **SSH (22)**: My IP (or specific IP range).
+    *   **HTTP (80)**: Anywhere (0.0.0.0/0).
+    *   **HTTPS (443)**: Anywhere (0.0.0.0/0).
+    *   *(Optional)* **8030**: If you want to bypass Traefik for debugging (not recommended).
+
+## 2. DNS Configuration
+
+Point your domain (e.g., `app.example.com`) to the **Public IPv4 address** of your new EC2 instance.
+You may also want to set up an Elastic IP in AWS to ensure your IP doesn't change on reboot.
+
+## 3. Server Setup
+
+SSH into your new instance:
+
+```bash
+ssh -i key.pem ubuntu@<your-ec2-ip>
+```
+
+### Install Docker
+
+Run the following commands to install Docker and Docker policies:
+
+```bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+# Install Docker packages:
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Allow running docker without sudo:
+sudo usermod -aG docker $USER
+# Log out and log back in for this to take effect
+exit
+```
+
+Reconnect to your server.
+
+## 4. Deploying AgentPlane
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/triggerdotdev/trigger.dev.git agentplane
+cd agentplane/hosting/docker
+```
+
+### Configure Environment
+
+Copy the production example to `.env`:
+
+```bash
+cp production.env.example .env
+nano .env
+```
+
+**Crucial Settings to Change:**
+1.  **Secrets**: Generate new secrets for `SESSION_SECRET`, `MAGIC_LINK_SECRET`, etc.
+2.  **Domains**: Update `APP_ORIGIN`, `LOGIN_ORIGIN`, `API_ORIGIN` to your domain (e.g., `https://app.example.com`).
+3.  **Email**: Configure `EMAIL_TRANSPORT` (Required for magic links).
+
+### Configure Traefik (SSL)
+
+To enable automatic SSL with Let's Encrypt, edit `docker-compose.traefik.yml`:
+
+```bash
+nano docker-compose.traefik.yml
+```
+
+Uncomment the Let's Encrypt lines in the `command` section and update the email:
+
+```yaml
+    command:
+      # ... other commands ...
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+      - --certificatesresolvers.letsencrypt.acme.email=your-email@example.com
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+```
+
+Also uncomment the `tls.certresolver` lines for each service (`webapp`, `registry`, `minio`):
+
+```yaml
+  webapp:
+    labels:
+      # ...
+      - "traefik.http.routers.webapp.rule=Host(`app.example.com`)"
+      - "traefik.http.routers.webapp.tls.certresolver=letsencrypt"
+```
+
+> **Note**: Make sure to update the `Host(...)` rules to match your actual domain!
+
+### Deploy
+
+We have provided a helper script to run the full stack:
+
+```bash
+chmod +x deploy.sh
+./deploy.sh up -d
+```
+
+## 5. Verification
+
+1.  Wait for a minute for containers to start.
+2.  Visit `https://app.example.com` in your browser.
+3.  You should see the login screen.
+4.  Check logs if something isn't working:
+
+```bash
+docker compose logs -f webapp
+# or
+docker compose logs -f traefik
+```
+
+## Maintenance
+
+### Updating
+
+To update to the latest version:
+
+```bash
+git pull
+./deploy.sh pull
+./deploy.sh up -d
+```

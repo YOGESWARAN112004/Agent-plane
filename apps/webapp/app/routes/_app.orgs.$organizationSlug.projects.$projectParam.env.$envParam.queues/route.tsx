@@ -89,7 +89,7 @@ const SearchParamsSchema = z.object({
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Queues | Trigger.dev`,
+      title: `Queues | AgentPlane`,
     },
   ];
 };
@@ -317,8 +317,8 @@ export default function Page() {
     environment.running === environment.concurrencyLimit * environment.burstFactor
       ? "limit"
       : environment.running > environment.concurrencyLimit
-      ? "burst"
-      : "within";
+        ? "burst"
+        : "within";
 
   const limitClassName =
     limitStatus === "burst" ? "text-warning" : limitStatus === "limit" ? "text-error" : undefined;
@@ -509,9 +509,8 @@ export default function Page() {
                     queues.map((queue) => {
                       const limit = queue.concurrencyLimit ?? environment.concurrencyLimit;
                       const isAtLimit = queue.running >= limit;
-                      const queueFilterableName = `${queue.type === "task" ? "task/" : ""}${
-                        queue.name
-                      }`;
+                      const queueFilterableName = `${queue.type === "task" ? "task/" : ""}${queue.name
+                        }`;
                       return (
                         <TableRow key={queue.name}>
                           <TableCell>
@@ -710,7 +709,7 @@ export default function Page() {
                     className={cn(
                       "flex min-h-full",
                       pagination.totalPages > 1 &&
-                        "justify-end border-t border-grid-dimmed px-2 py-3"
+                      "justify-end border-t border-grid-dimmed px-2 py-3"
                     )}
                   >
                     <PaginationControls
@@ -792,8 +791,8 @@ function EnvironmentPauseResumeButton({
             {env.paused
               ? `This will allow runs to be dequeued in ${environmentFullTitle(env)} again.`
               : `This will pause all runs from being dequeued in ${environmentFullTitle(
-                  env
-                )}. Any executing runs will continue to run.`}
+                env
+              )}. Any executing runs will continue to run.`}
           </Paragraph>
           <Form method="post" onSubmit={() => setIsOpen(false)}>
             <input
@@ -950,7 +949,7 @@ function QueueOverrideConcurrencyButton({
 
   const isLoading = Boolean(
     navigation.formData?.get("action") === "queue-override" ||
-      navigation.formData?.get("action") === "queue-remove-override"
+    navigation.formData?.get("action") === "queue-remove-override"
   );
 
   return (
@@ -1130,11 +1129,9 @@ function BurstFactorTooltip({
 }) {
   return (
     <InfoIconTooltip
-      content={`Your single queue concurrency limit is capped at ${
-        environment.concurrencyLimit
-      }, but you can burst up to ${
-        environment.burstFactor * environment.concurrencyLimit
-      } when across multiple queues/tasks.`}
+      content={`Your single queue concurrency limit is capped at ${environment.concurrencyLimit
+        }, but you can burst up to ${environment.burstFactor * environment.concurrencyLimit
+        } when across multiple queues/tasks.`}
       contentClassName="max-w-xs"
     />
   );

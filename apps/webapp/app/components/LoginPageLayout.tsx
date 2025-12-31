@@ -5,7 +5,7 @@ import { LyftLogo } from "~/assets/logos/LyftLogo";
 import { MiddayLogo } from "~/assets/logos/MiddayLogo";
 import { TldrawLogo } from "~/assets/logos/TldrawLogo";
 import { UnkeyLogo } from "~/assets/logos/UnkeyLogo";
-import { LogoType } from "./LogoType";
+// import { LogoType } from "./LogoType";
 import { LinkButton } from "./primitives/Buttons";
 import { Header3 } from "./primitives/Headers";
 import { Paragraph } from "./primitives/Paragraph";
@@ -19,21 +19,21 @@ interface QuoteType {
 
 const quotes: QuoteType[] = [
   {
-    quote: "Trigger.dev is redefining background jobs for modern developers.",
+    quote: "AgentPlane is redefining background jobs for modern developers.",
     person: "Paul Copplestone, Supabase",
   },
   {
     quote:
-      "Trigger.dev is a great way to automate email campaigns with Resend, and we've heard nothing but good things from our mutual customers.",
+      "AgentPlane is a great way to automate email campaigns with Resend, and we've heard nothing but good things from our mutual customers.",
     person: "Zeno Rocha, Resend",
   },
   {
-    quote: "We love Trigger.dev and it’s had a big impact in dev iteration velocity already.",
+    quote: "We love AgentPlane and it’s had a big impact in dev iteration velocity already.",
     person: "André Neves, ZBD",
   },
   {
     quote:
-      "We’ve been looking for a product like Trigger.dev for a really long time - automation that's simple and developer-focused.",
+      "We’ve been looking for a product like AgentPlane for a really long time - automation that's simple and developer-focused.",
     person: "Han Wang, Mintlify",
   },
 ];
@@ -50,11 +50,11 @@ export function LoginPageLayout({ children }: { children: React.ReactNode }) {
       <div className="border-r border-grid-bright bg-background-bright">
         <div className="flex h-full flex-col items-center justify-between p-6">
           <div className="flex w-full items-center justify-between">
-            <a href="https://trigger.dev">
-              <LogoType className="w-36" />
+            <a href="https://agentplane.dev">
+              <span className="text-3xl font-bold text-text-bright">AgentPlane</span>
             </a>
             <LinkButton
-              to="https://trigger.dev/docs"
+              to="https://agentplane.dev/docs"
               variant={"tertiary/small"}
               LeadingIcon={BookOpenIcon}
             >
@@ -63,8 +63,8 @@ export function LoginPageLayout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="flex h-full max-w-sm items-center justify-center">{children}</div>
           <Paragraph variant="small" className="text-center">
-            Having login issues? <TextLink href="https://@trigger.dev/contact">Email us</TextLink>{" "}
-            or <TextLink href="https://trigger.dev/discord">ask us in Discord</TextLink>
+            Having login issues? <TextLink href="https://agentplane.dev/contact">Email us</TextLink>{" "}
+            or <TextLink href="https://agentplane.dev/discord">ask us in Discord</TextLink>
           </Paragraph>
         </div>
       </div>

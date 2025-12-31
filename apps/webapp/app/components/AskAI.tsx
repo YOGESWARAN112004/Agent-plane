@@ -234,7 +234,7 @@ function ChatMessages({
           }}
         >
           <Paragraph className="mb-3 mt-1.5 pl-1">
-            I'm trained on docs, examples, and other content. Ask me anything about Trigger.dev.
+            I'm trained on docs, examples, and other content. Ask me anything about AgentPlane.
           </Paragraph>
           {exampleQuestions.map((question, index) => (
             <motion.button
@@ -524,9 +524,8 @@ function GradientSpinnerBackground({
       className={`flex rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 p-px ${className}`}
     >
       <div
-        className={`flex h-full w-full items-center justify-center rounded-full bg-charcoal-600 ${
-          hoverEffect ? "transition group-hover:bg-charcoal-550" : ""
-        }`}
+        className={`flex h-full w-full items-center justify-center rounded-full bg-charcoal-600 ${hoverEffect ? "transition group-hover:bg-charcoal-550" : ""
+          }`}
       >
         {children}
       </div>

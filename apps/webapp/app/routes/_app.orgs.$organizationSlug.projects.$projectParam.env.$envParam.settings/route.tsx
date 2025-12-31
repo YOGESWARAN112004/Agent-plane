@@ -48,7 +48,7 @@ import { GitHubSettingsPanel } from "../resources.orgs.$organizationSlug.project
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Project settings | Trigger.dev`,
+      title: `Project settings | AgentPlane`,
     },
   ];
 };

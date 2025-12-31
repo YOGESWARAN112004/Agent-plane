@@ -30,7 +30,7 @@ export const headers = () => ({
 export const meta: MetaFunction = ({ data }) => {
   const typedData = data as UseDataFunctionReturn<typeof loader>;
   return [
-    { title: typedData?.appEnv ? `Trigger.dev${appEnvTitleTag(typedData.appEnv)}` : "Trigger.dev" },
+    { title: typedData?.appEnv ? `AgentPlane${appEnvTitleTag(typedData.appEnv)}` : "AgentPlane" },
     {
       name: "viewport",
       content: "width=1024, initial-scale=1",

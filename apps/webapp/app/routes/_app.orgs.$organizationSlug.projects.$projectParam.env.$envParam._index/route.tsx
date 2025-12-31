@@ -98,7 +98,7 @@ import {
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Tasks | Trigger.dev`,
+      title: `Tasks | AgentPlane`,
     },
   ];
 };
@@ -356,8 +356,8 @@ export default function Page() {
                                         const taskData = data[task.slug];
                                         return taskData
                                           ? formatDurationMilliseconds(taskData * 1000, {
-                                              style: "short",
-                                            })
+                                            style: "short",
+                                          })
                                           : "–";
                                       }}
                                     </TypedAwait>
@@ -673,7 +673,7 @@ function HelpfulInfoHasTasks({ onClose }: { onClose: () => void }) {
         <LinkWithIcon to={docsPath("/cli-dev")} description="Running the CLI" isExternal />
         <LinkWithIcon
           to={docsPath("/how-it-works")}
-          description="How Trigger.dev works"
+          description="How AgentPlane works"
           isExternal
         />
         <div className="mb-2 flex items-center gap-2 border-b border-grid-dimmed pb-2 pt-6">
@@ -773,14 +773,14 @@ function HelpfulInfoHasTasks({ onClose }: { onClose: () => void }) {
       <Dialog open={isVideoDialogOpen} onOpenChange={setIsVideoDialogOpen}>
         <DialogContent className="sm:max-w-screen-lg">
           <DialogHeader className="mb-4 pt-1">
-            <DialogTitle>Trigger.dev walkthrough</DialogTitle>
+            <DialogTitle>AgentPlane walkthrough</DialogTitle>
           </DialogHeader>
           <div className="aspect-video">
             <iframe
               width="100%"
               height="100%"
               src="https://www.youtube.com/embed/YH_4c0K7fGM?si=BcX6MAt_V139sRw9"
-              title="Trigger.dev walkthrough"
+              title="AgentPlane walkthrough"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen

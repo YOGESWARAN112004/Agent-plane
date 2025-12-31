@@ -111,7 +111,7 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-const HandIcon = forwardRef<HTMLDivElement, {}>(({}, ref) => {
+const HandIcon = forwardRef<HTMLDivElement, {}>(({ }, ref) => {
   return (
     <div ref={ref}>
       <HandRaisedIcon className="h-7 w-7 text-amber-400" />
@@ -144,7 +144,7 @@ export default function Page() {
         <MainCenteredContainer className="max-w-[26rem] rounded-lg border border-grid-bright bg-background-dimmed p-5 shadow-lg">
           <Form method="post" {...form.props}>
             <FormTitle
-              title="Welcome to Trigger.dev"
+              title="Welcome to AgentPlane"
               LeadingIcon={
                 <MotionHand
                   style={{
@@ -193,7 +193,7 @@ export default function Page() {
                   spellCheck={false}
                 />
                 {!shouldShowConfirm && (
-                  <Hint>Confirm this is the email you'd like for your Trigger.dev account.</Hint>
+                  <Hint>Confirm this is the email you'd like for your AgentPlane account.</Hint>
                 )}
                 <FormError id={email.errorId}>{email.error}</FormError>
               </InputGroup>
@@ -208,7 +208,7 @@ export default function Page() {
                     spellCheck={false}
                   />
                   <Hint>
-                    Check this is the email you'd like associated with your Trigger.dev account.
+                    Check this is the email you'd like associated with your AgentPlane account.
                   </Hint>
                   <FormError id={confirmEmail.errorId}>{confirmEmail.error}</FormError>
                 </InputGroup>

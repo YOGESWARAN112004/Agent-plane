@@ -134,10 +134,10 @@ const lavender = {
 /** Trigger.dev custom palette */
 
 /** Text colors */
-const primary = apple[500];
+const primary = colors.indigo[500];
 const secondary = charcoal[650];
 const tertiary = charcoal[700];
-const textLink = lavender[400];
+const textLink = colors.indigo[400];
 const textDimmed = charcoal[400];
 const textBright = charcoal[200];
 const backgroundBright = charcoal[800];
@@ -257,8 +257,8 @@ module.exports = {
         sm: `calc(${radius} - 4px)`,
       },
       boxShadow: {
-        "glow-primary": "0 0 10px 5px rgba(218, 244, 55, 0.2)",
-        "glow-secondary": "0 0 10px 5px rgba(79, 70, 229, 0.2)",
+        "glow-primary": "0 0 10px 5px rgba(99, 102, 241, 0.2)", // Indigo
+        "glow-secondary": "0 0 10px 5px rgba(168, 85, 247, 0.2)", // Purple
         "glow-pink": "0 0 10px 5px rgba(236, 72, 153, 0.2)",
       },
       outlineWidth: {
@@ -298,8 +298,8 @@ module.exports = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(closest-side, var(--tw-gradient-stops))",
-        "gradient-primary": `linear-gradient(90deg, acid-500 0%, toxic-500 100%)`,
-        "gradient-primary-hover": `linear-gradient(80deg, acid-600 0%, toxic-600 100%)`,
+        "gradient-primary": `linear-gradient(90deg, ${colors.indigo[500]} 0%, ${colors.purple[500]} 100%)`,
+        "gradient-primary-hover": `linear-gradient(80deg, ${colors.indigo[600]} 0%, ${colors.purple[600]} 100%)`,
         "gradient-secondary": `linear-gradient(90deg, hsl(271 91 65) 0%, hsl(221 83 53) 100%)`,
         "gradient-radial-secondary ": `radial-gradient(hsl(271 91 65), hsl(221 83 53))`,
       },

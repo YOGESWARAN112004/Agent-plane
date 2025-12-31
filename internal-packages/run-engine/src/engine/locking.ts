@@ -2,6 +2,7 @@
 const { default: Redlock } = require("redlock");
 import { AsyncLocalStorage } from "async_hooks";
 import { Redis } from "@internal/redis";
+// @ts-ignore
 import * as redlock from "redlock";
 import { tryCatch } from "@trigger.dev/core";
 import { Logger } from "@trigger.dev/core/logger";
@@ -32,9 +33,9 @@ export class LockAcquisitionTimeoutError extends Error {
   ) {
     super(
       message ||
-        `Failed to acquire lock on resources [${resources.join(
-          ", "
-        )}] after ${totalWaitTime}ms and ${attempts} attempts`
+      `Failed to acquire lock on resources [${resources.join(
+        ", "
+      )}] after ${totalWaitTime}ms and ${attempts} attempts`
     );
     this.name = "LockAcquisitionTimeoutError";
   }
@@ -286,8 +287,7 @@ export class RunLocker {
           sortedResources,
           Math.round(totalWaitTime),
           attempt + 1,
-          `Lock acquisition on resources [${sortedResources.join(", ")}] failed after ${
-            attempt + 1
+          `Lock acquisition on resources [${sortedResources.join(", ")}] failed after ${attempt + 1
           } attempts`
         );
       }

@@ -75,7 +75,7 @@ import {
 export const meta: MetaFunction = () => {
   return [
     {
-      title: `Environment variables | Trigger.dev`,
+      title: `Environment variables | AgentPlane`,
     },
   ];
 };
