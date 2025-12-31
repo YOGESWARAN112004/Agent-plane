@@ -1,0 +1,51 @@
+model_list:
+  # 1. Universal OpenAI Support (gpt-4o, gpt-3.5, etc.)
+  - model_name: "openai/*"
+    litellm_params:
+      model: "openai/*"
+      api_key: "os.environ/OPENAI_API_KEY" # Default fallback key (optional)
+    guardrails:
+      - guardrail_name: "pii-scrubber"
+        guardrail: presidio
+        mode: "pre_call"
+
+  # 2. Universal Anthropic Support (claude-3-5-sonnet, etc.)
+  - model_name: "anthropic/*"
+    litellm_params:
+      model: "anthropic/*"
+    guardrails:
+      - guardrail_name: "pii-scrubber"
+        guardrail: presidio
+        mode: "pre_call"
+
+  # 3. Groq (Fast Inference)
+  - model_name: "groq/*"
+    litellm_params:
+      model: "groq/*"
+
+  # 4. Google Gemini
+  - model_name: "gemini/*"
+    litellm_params:
+      model: "gemini/*"
+
+  # 5. AWS Bedrock (The tricky one)
+  - model_name: "bedrock/*"
+    litellm_params:
+      model: "bedrock/*"
+
+general_settings:
+  # CRITICAL: Allows users to pass their own keys (BYOK)
+  allow_user_auth: true 
+  master_key: "sk-admin-secret"
+  
+  # Logs every request to Helicone automatically
+  success_callback: ["helicone"]
+  failure_callback: ["helicone"]
+
+guardrails:
+  - guardrail_name: "pii-scrubber"
+    guardrail: presidio
+    pii_entities_config:
+      EMAIL_ADDRESS: "MASK"      # Becomes <EMAIL_ADDRESS>
+      PHONE_NUMBER: "BLOCK"      # Blocks request entirely
+      CREDIT_CARD: "BLOCK"

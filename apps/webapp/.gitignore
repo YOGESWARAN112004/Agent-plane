@@ -9,8 +9,8 @@ node_modules
 
 /app/styles/tailwind.css
 
-# Ensure the .env symlink is not removed by accident
-!.env
+# .env is now ignored
+
 
 # Storybook build outputs
 build-storybook.log

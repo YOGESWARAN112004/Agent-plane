@@ -214,3 +214,30 @@ services:
       - app_network
     depends_on:
       - prometheus
+
+  # litellm:
+  #   image: ghcr.io/berriai/litellm:main-latest
+  #   container_name: litellm-proxy
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - ./litellm-config.yaml:/app/config.yaml
+  #   environment:
+  #     - OPENAI_API_KEY=${OPENAI_API_KEY}
+  #     - HELICONE_API_KEY=${HELICONE_API_KEY}
+  #     # Point to the internal Presidio container
+  #     - PRESIDIO_ANALYZER_API_BASE=http://presidio-analyzer:5001
+  #   command: ["--config", "/app/config.yaml", "--detailed_debug"]
+  #   networks:
+  #     - app_network
+  #   depends_on:
+  #     - presidio-analyzer
+
+  # # --- NEW: The PII Scrubber ---
+  # presidio-analyzer:
+  #   image: mcr.microsoft.com/presidio-analyzer:latest
+  #   container_name: presidio-analyzer
+  #   ports:
+  #     - "5001:5001"
+  #   networks:
+  #     - app_network
